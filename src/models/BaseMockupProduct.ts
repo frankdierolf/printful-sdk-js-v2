@@ -6,7 +6,7 @@ export type BaseMockupProduct = {
     /**
      * Mockup product source
      */
-    source?: string;
+    source: string;
     /**
      * Used to specify style of mockups that should be generated. For example:
      * * On the hanger
@@ -16,6 +16,6 @@ export type BaseMockupProduct = {
      * Available mockup styles for catalog product can be found under _[Retrieve catalog product mockup styles](#operation/retrieveMockupStylesByProductId)_.
      *
      */
-    mockup_style_ids?: Array<number>;
+    mockup_style_ids: Array<number>;
 };
 

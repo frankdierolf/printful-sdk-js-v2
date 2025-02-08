@@ -11,11 +11,11 @@ export type DesignPlacement = {
     /**
      * Name of placement that can be used to place design in a correct spot on a product
      */
-    placement?: string;
+    placement: string;
     /**
      * Indicates technique for which the placements are available
      */
-    technique?: string;
+    technique: string;
     /**
      * Print area width for that placement
      */
@@ -27,7 +27,7 @@ export type DesignPlacement = {
     /**
      * Available layers for that product
      */
-    layers?: Array<FileLayer>;
+    layers: Array<FileLayer>;
     /**
      * Possible placement options
      */

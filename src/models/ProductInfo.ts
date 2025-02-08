@@ -5,7 +5,7 @@
 import type { Product } from './Product';
 import type { ProductLinks } from './ProductLinks';
 /**
- * Information about the Product
+ * Information about the Catalog Product
  */
 export type ProductInfo = (Product & {
     _links?: ProductLinks;

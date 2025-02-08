@@ -2,7 +2,7 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { HateoasLink_2 } from './HateoasLink_2';
+import type { HateoasLink } from './HateoasLink';
 /**
  * HATEOAS links
  */
@@ -10,30 +10,30 @@ export type ProductLinks = {
     /**
      * Link to same resource
      */
-    self?: HateoasLink_2;
+    self: HateoasLink;
     /**
      * Link to product variants
      */
-    variants?: HateoasLink_2;
+    variants: HateoasLink;
     /**
      * Link to product categories
      */
-    categories?: HateoasLink_2;
+    categories: HateoasLink;
     /**
      * Link to product prices
      */
-    product_prices?: HateoasLink_2;
+    product_prices: HateoasLink;
     /**
      * Link product size guides
      */
-    product_sizes?: HateoasLink_2;
+    product_sizes: HateoasLink;
     /**
      * Link product images
      */
-    product_images?: HateoasLink_2;
+    product_images: HateoasLink;
     /**
      * Link to product stock availability endpoint
      */
-    availability?: HateoasLink_2;
+    availability: HateoasLink;
 };
 

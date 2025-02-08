@@ -11,15 +11,15 @@ export type VariantStockAvailability = {
     /**
      * Catalog variant ID for which the the stock availability data apply
      */
-    catalog_variant_id?: number;
+    catalog_variant_id: number;
     /**
      * Stock availability data for specific techniques of a catalog variant
      */
-    techniques?: Array<TechniqueStockAvailability>;
+    techniques: Array<TechniqueStockAvailability>;
     /**
      * HATEOAS links
      */
-    _links?: {
+    _links: {
         /**
          * Link to the catalog variant details
          */

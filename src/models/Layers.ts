@@ -10,14 +10,14 @@ export type Layers = {
     /**
      * Type of layer
      */
-    type?: string;
+    type: string;
     /**
      * Additional price for layer
      */
-    additional_price?: string;
+    additional_price: string;
     /**
      * Layer options prices
      */
-    layer_options?: Array<LayerOptionPrices>;
+    layer_options: Array<LayerOptionPrices>;
 };
 

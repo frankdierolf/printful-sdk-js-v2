@@ -2,18 +2,18 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { ItemWithoutPlacements } from './ItemWithoutPlacements';
-export type WarehouseItem = ({
+import type { ItemWithoutPlacementsReadonly } from './ItemWithoutPlacementsReadonly';
+export type WarehouseItemReadonly = ({
     /**
      * Warehouse source
      */
-    source?: WarehouseItem.source;
+    source: WarehouseItemReadonly.source;
     /**
      * ID of warehouse variant
      */
-    warehouse_product_variant_id?: number;
-} & ItemWithoutPlacements);
-export namespace WarehouseItem {
+    warehouse_product_variant_id: number;
+} & ItemWithoutPlacementsReadonly);
+export namespace WarehouseItemReadonly {
     /**
      * Warehouse source
      */

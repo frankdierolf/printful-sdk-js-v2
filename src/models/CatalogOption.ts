@@ -9,18 +9,18 @@ export type CatalogOption = {
     /**
      * Option identifier
      */
-    name?: string;
+    name: string;
     /**
      * Available techniques for option
      */
-    techniques?: Array<string>;
+    techniques: Array<string>;
     /**
      * Type of accepted value
      */
-    type?: string;
+    type: string;
     /**
      * List of available option values.
      */
-    values?: any[];
+    values: any[];
 };
 

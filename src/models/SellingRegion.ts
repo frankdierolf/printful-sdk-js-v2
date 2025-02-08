@@ -3,7 +3,7 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Only returns the products that can be sold in the specified region.
+ * Only returns the products that can be sold in the specified region. If is set to 'all' returns each region availability for specified product.
  */
 export enum SellingRegion {
     WORLDWIDE = 'worldwide',
@@ -14,6 +14,7 @@ export enum SellingRegion {
     LATVIA = 'latvia',
     UK = 'uk',
     FRANCE = 'france',
+    GERMANY = 'germany',
     AUSTRALIA = 'australia',
     JAPAN = 'japan',
     NEW_ZEALAND = 'new_zealand',
@@ -22,4 +23,5 @@ export enum SellingRegion {
     SOUTHEAST_ASIA = 'southeast_asia',
     REPUBLIC_OF_KOREA = 'republic_of_korea',
     ENGLISH_SPEAKING_REGIONS = 'english_speaking_regions',
+    ALL = 'all',
 }

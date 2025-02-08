@@ -5,6 +5,8 @@
 import type { Address } from '../models/Address';
 import type { CatalogItem } from '../models/CatalogItem';
 import type { Customization } from '../models/Customization';
+import type { EstimationAddress } from '../models/EstimationAddress';
+import type { RetailCosts_2 } from '../models/RetailCosts_2';
 import type { CancelablePromise } from '../core/CancelablePromise';
 import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 export class OrdersV2Service {
@@ -75,27 +77,7 @@ export class OrdersV2Service {
              */
             order_items: Array<CatalogItem>;
             customization?: Customization;
-            /**
-             * Retail costs
-             */
-            retail_costs?: {
-                /**
-                 * The code of the currency in which the retail costs are returned.
-                 */
-                currency?: string;
-                /**
-                 * Discount sum.
-                 */
-                discount?: string;
-                /**
-                 * Shipping costs.
-                 */
-                shipping?: string;
-                /**
-                 * Sum of taxes (not included in the item price).
-                 */
-                tax?: string;
-            };
+            retail_costs?: RetailCosts_2;
         },
     ): CancelablePromise<any> {
         return this.httpRequest.request({
@@ -538,6 +520,76 @@ export class OrdersV2Service {
             },
             errors: {
                 401: `Unauthorized`,
+            },
+        });
+    }
+    /**
+     * Retrieve an order estimation task
+     * Retrieve an order cost estimation task from a specific store.
+     * Estimation results are only available for one hour after cost estimation task is done.
+     *
+     * @param id Order estimation task ID.
+     * @param xPfStoreId Use this to specify which store you want to use (required only for account level token).
+     *
+     * The store IDs can be retrieved with the [Get basic information about stores](/docs/#operation/getStores) endpoint.
+     *
+     * @returns any OK
+     * @throws ApiError
+     */
+    public getOrderEstimationTask(
+        id: string,
+        xPfStoreId?: string,
+    ): CancelablePromise<any> {
+        return this.httpRequest.request({
+            method: 'GET',
+            url: '/v2/order-estimation-tasks',
+            headers: {
+                'X-PF-Store-Id': xPfStoreId,
+            },
+            query: {
+                'id': id,
+            },
+            errors: {
+                401: `Unauthorized`,
+                404: `Not found`,
+            },
+        });
+    }
+    /**
+     * Create a new order estimation task
+     * Use this endpoint to estimate orders with items.
+     * @param xPfStoreId Use this to specify which store you want to use (required only for account level token).
+     *
+     * The store IDs can be retrieved with the [Get basic information about stores](/docs/#operation/getStores) endpoint.
+     *
+     * @param requestBody POST request body
+     * @returns any OK
+     * @throws ApiError
+     */
+    public createOrderEstimationTask(
+        xPfStoreId?: string,
+        requestBody?: {
+            /**
+             * The recipient data.
+             */
+            recipient: EstimationAddress;
+            /**
+             * Array of order items
+             */
+            order_items: Array<CatalogItem>;
+            retail_costs?: RetailCosts_2;
+        },
+    ): CancelablePromise<any> {
+        return this.httpRequest.request({
+            method: 'POST',
+            url: '/v2/order-estimation-tasks',
+            headers: {
+                'X-PF-Store-Id': xPfStoreId,
+            },
+            body: requestBody,
+            mediaType: 'application/json',
+            errors: {
+                400: `Bad Request`,
             },
         });
     }

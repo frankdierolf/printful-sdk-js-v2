@@ -12,71 +12,71 @@ export type Product = {
     /**
      * Product ID
      */
-    id?: number;
+    id: number;
     /**
      * Main category of product
      */
-    main_category_id?: number;
+    main_category_id: number;
     /**
      * Product type
      */
-    type?: string;
+    type: string;
     /**
      * Product name
      */
-    name?: string;
+    name: string;
     /**
      * Brand name
      */
-    brand?: string | null;
+    brand: string | null;
     /**
      * Model name
      */
-    model?: string | null;
+    model: string | null;
     /**
      * URL of a sample image for this product
      */
-    image?: string;
+    image: string;
     /**
      * Number of available variants for this product
      */
-    variant_count?: number;
+    variant_count: number;
     /**
      * Product is discontinued and can no longer be ordered
      */
-    is_discontinued?: boolean;
+    is_discontinued: boolean;
     /**
      * Product description
      */
-    description?: string;
+    description: string;
     /**
      * Product sizes
      */
-    sizes?: Array<string>;
+    sizes: Array<string>;
     /**
      * Product colors
      */
-    colors?: Array<{
+    colors: Array<{
         /**
          * Name of the color
          */
-        name?: string;
+        name: string;
         /**
          * Value of the color in HEX
          */
-        value?: string;
+        value: string;
     }>;
     /**
      * Product's techniques
      */
-    techniques?: Array<Techniques>;
+    techniques: Array<Techniques>;
     /**
      * Product's design placements
      */
-    placements?: Array<DesignPlacement>;
+    placements: Array<DesignPlacement>;
     /**
      * Possible product options
      */
-    product_options?: Array<CatalogOption>;
+    product_options: Array<CatalogOption>;
 };
 

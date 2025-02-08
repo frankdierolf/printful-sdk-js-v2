@@ -6,18 +6,18 @@ export type VariantImage = {
     /**
      * Placement associated with the image
      */
-    placement?: string;
+    placement: string;
     /**
      * image URL
      */
-    image_url?: string | null;
+    image_url: string | null;
     /**
      * Background color of an image. Null if background transparent
      */
-    background_color?: string;
+    background_color: string;
     /**
      * Background image of an image specified in the `image_url`. Null if no background image
      */
-    background_image?: string | null;
+    background_image: string | null;
 };
 

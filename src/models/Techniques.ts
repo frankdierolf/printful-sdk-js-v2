@@ -9,14 +9,14 @@ export type Techniques = {
     /**
      * Technique key
      */
-    key?: string;
+    key: string;
     /**
      * Technique display name
      */
-    display_name?: string;
+    display_name: string;
     /**
      * This is the default product technique
      */
-    is_default?: boolean;
+    is_default: boolean;
 };
 

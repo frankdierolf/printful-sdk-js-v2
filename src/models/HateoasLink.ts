@@ -6,6 +6,6 @@ export type HateoasLink = {
     /**
      * The HREF of the linked resource.
      */
-    href?: string;
+    href: string;
 };
 

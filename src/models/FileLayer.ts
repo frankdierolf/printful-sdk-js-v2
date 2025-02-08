@@ -7,7 +7,7 @@ export type FileLayer = {
     /**
      * File type layer
      */
-    type?: string;
+    type: string;
     /**
      * Possible layer options
      */

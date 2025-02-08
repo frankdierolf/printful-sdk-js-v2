@@ -2,7 +2,7 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { HateoasLink_2 } from './HateoasLink_2';
+import type { HateoasLink } from './HateoasLink';
 /**
  * HATEOAS links
  */
@@ -10,18 +10,18 @@ export type ProductsLinks = {
     /**
      * Link to same resource
      */
-    self?: HateoasLink_2;
+    self: HateoasLink;
     /**
      * Link to next resource
      */
-    next?: HateoasLink_2;
+    next?: HateoasLink;
     /**
      * Link to first resource
      */
-    first?: HateoasLink_2;
+    first?: HateoasLink;
     /**
      * Link to the last resource
      */
-    last?: HateoasLink_2;
+    last?: HateoasLink;
 };
 

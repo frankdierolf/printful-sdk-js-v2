@@ -10,11 +10,11 @@ export type Measurement = {
     /**
      * Measurement type
      */
-    type_label?: string;
+    type_label: string;
     /**
      * The measurement unit if it's not defined on the size table level or is different
      */
-    unit?: string;
+    unit: string;
     /**
      * The measurement values for each size
      */

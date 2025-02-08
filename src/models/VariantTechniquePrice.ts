@@ -9,18 +9,18 @@ export type VariantTechniquePrice = {
     /**
      * Key associated to the technique
      */
-    technique_key?: string;
+    technique_key: string;
     /**
      * Full technique name
      */
-    technique_display_name?: string;
+    technique_display_name: string;
     /**
      * Price converted to the region currency
      */
-    price?: string;
+    price: string;
     /**
      * Discounted price per region
      */
-    discounted_price?: string;
+    discounted_price: string;
 };
 

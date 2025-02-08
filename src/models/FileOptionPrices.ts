@@ -9,22 +9,22 @@ export type FileOptionPrices = {
     /**
      * Option name
      */
-    name?: string;
+    name: string;
     /**
      * Option value type
      */
-    type?: string;
+    type: string;
     /**
      * Possible option values
      */
-    values?: any[];
+    values: any[];
     /**
      * Option description
      */
-    description?: string;
+    description: string;
     /**
      * Additional price expressed in the region currency
      */
-    price?: Record<string, string>;
+    price: Record<string, string>;
 };
 

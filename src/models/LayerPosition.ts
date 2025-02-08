@@ -9,18 +9,18 @@ export type LayerPosition = {
     /**
      * Layer width in inches
      */
-    width?: number;
+    width: number;
     /**
      * Layer height in inches
      */
-    height?: number;
+    height: number;
     /**
      * Layer top position in inches
      */
-    top?: number;
+    top: number;
     /**
      * Layer left position in inches
      */
-    left?: number;
+    left: number;
 };
 

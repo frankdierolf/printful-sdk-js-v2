@@ -10,10 +10,10 @@ export type VariantsPriceData = {
     /**
      * Variant id
      */
-    id?: number;
+    id: number;
     /**
      * Array containing pricing information about available techniques per variant
      */
-    techniques?: Array<VariantTechniquePrice>;
+    techniques: Array<VariantTechniquePrice>;
 };
 

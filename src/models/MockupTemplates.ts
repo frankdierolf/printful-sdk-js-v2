@@ -9,59 +9,59 @@ export type MockupTemplates = {
     /**
      * A list of variant IDs for which the positions apply
      */
-    catalog_variant_ids?: Array<number>;
+    catalog_variant_ids: Array<number>;
     /**
      * Catalog product placement that is used for the design
      */
-    placement?: string;
+    placement: string;
     /**
      * Catalog product technique that is used for the design
      */
-    technique?: string;
+    technique: string;
     /**
      * Semi-transparent main template image URL.
      */
-    image_url?: string;
+    image_url: string;
     /**
      * Background image URL (optional). Used for certain mockups e.g. a wall behind hanged poster. If it's defined it is intended to be layered under the image defined in `image_url`.
      */
-    background_url?: string | null;
+    background_url: string | null;
     /**
      * HEX color code that should be used as a background color of `image_url`.
      */
-    background_color?: number | null;
+    background_color: number | null;
     /**
      * Width of the whole template in pixels.
      */
-    template_width?: number;
+    template_width: number;
     /**
      * Height of the whole template in pixels.
      */
-    template_height?: number;
+    template_height: number;
     /**
      * Print area width (image is positioned in this area).
      */
-    print_area_width?: number;
+    print_area_width: number;
     /**
      * Print area height (image is positioned in this area).
      */
-    print_area_height?: number;
+    print_area_height: number;
     /**
      * Print area top offset (offset in template).
      */
-    print_area_top?: number;
+    print_area_top: number;
     /**
      * Print area left offset (offset in template).
      */
-    print_area_left?: number;
+    print_area_left: number;
     /**
      * Should the main template image (image_url) be used as an overlay or as a background.
      */
-    template_positioning?: MockupTemplates.template_positioning;
+    template_positioning: MockupTemplates.template_positioning;
     /**
      * Wall art product orientation. Possible values: horizontal, vertical, any
      */
-    orientation?: MockupTemplates.orientation;
+    orientation: MockupTemplates.orientation;
 };
 export namespace MockupTemplates {
     /**

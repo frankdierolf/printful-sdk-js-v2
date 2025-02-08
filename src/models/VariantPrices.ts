@@ -11,8 +11,8 @@ export type VariantPrices = {
     /**
      * Currency in which prices are returned
      */
-    currency?: string;
-    product?: {
+    currency: string;
+    product: {
         /**
          * Product Identifier
          */
@@ -22,6 +22,6 @@ export type VariantPrices = {
          */
         placements?: Array<AdditionalPlacements>;
     };
-    variant?: VariantsPriceData;
+    variant: VariantsPriceData;
 };
 

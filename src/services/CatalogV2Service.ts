@@ -25,7 +25,7 @@ export class CatalogV2Service {
      * This can be used to return results after the initial 100. For example, sending offset 100
      *
      * @param placements One or more identifiers of a placement to return only products with variants that have that placement. The complete list of placements can be found [here](https://developers.printful.com/docs/#section/Placements).
-     * @param sellingRegionName Only returns the products that can be sold in the specified region.
+     * @param sellingRegionName Only returns the products that can be sold in the specified region. If is set to 'all' returns each region availability for specified product.
      * @param sortDirection This parameter only is used if sort_type is also present and it changes the order of the returned products.
      * The exact meaning varies depending on the value of `sort_type`:
      * * `sort_type=new`
@@ -37,10 +37,15 @@ export class CatalogV2Service {
      * * `sort_type=price`
      * * ascending from lowest to highest price.
      * * descending from highest to lowest price.
+     * * `sort_type=bestseller`
+     * * ascending from non bestsellers to bestsellers.
+     * * descending from bestsellers to non bestsellers.
      *
      * @param sortType The sorting strategy to use when sorting the result. When it's not present, no specific order is guaranteed.
      *
      * @param techniques One or more techniques to return only products with variants that can be printed using one of the techniques.
+     * @param xPfLanguage Use this to specify which locale you would like to use in the responses, for some endpoints this can affect translations.
+     *
      * @returns any OK
      * @throws ApiError
      */
@@ -51,14 +56,18 @@ export class CatalogV2Service {
         _new: boolean = false,
         offset?: number,
         placements?: Array<string>,
-        sellingRegionName: 'worldwide' | 'north_america' | 'canada' | 'europe' | 'spain' | 'latvia' | 'uk' | 'france' | 'australia' | 'japan' | 'new_zealand' | 'italy' | 'brazil' | 'southeast_asia' | 'republic_of_korea' | 'english_speaking_regions' = 'worldwide',
+        sellingRegionName: 'worldwide' | 'north_america' | 'canada' | 'europe' | 'spain' | 'latvia' | 'uk' | 'france' | 'germany' | 'australia' | 'japan' | 'new_zealand' | 'italy' | 'brazil' | 'southeast_asia' | 'republic_of_korea' | 'english_speaking_regions' | 'all' = 'worldwide',
         sortDirection: 'ascending' | 'descending' = 'descending',
-        sortType?: 'new' | 'rating' | 'price',
+        sortType?: 'new' | 'rating' | 'price' | 'bestseller',
         techniques?: Array<TechniqueEnum>,
+        xPfLanguage?: string,
     ): CancelablePromise<any> {
         return this.httpRequest.request({
             method: 'GET',
             url: '/v2/catalog-products',
+            headers: {
+                'X-PF-Language': xPfLanguage,
+            },
             query: {
                 'category_ids': categoryIds,
                 'colors': colors,
@@ -81,19 +90,25 @@ export class CatalogV2Service {
      * Returns information about a single specified catalog product. [See catalog product](#tag/Catalog-v2/What-is-a-catalog-product)
      *
      * @param id Product ID.
-     * @param sellingRegionName Only returns the products that can be sold in the specified region.
+     * @param sellingRegionName Only returns the products that can be sold in the specified region. If is set to 'all' returns each region availability for specified product.
+     * @param xPfLanguage Use this to specify which locale you would like to use in the responses, for some endpoints this can affect translations.
+     *
      * @returns any OK
      * @throws ApiError
      */
     public getProductById(
         id: number,
-        sellingRegionName: 'worldwide' | 'north_america' | 'canada' | 'europe' | 'spain' | 'latvia' | 'uk' | 'france' | 'australia' | 'japan' | 'new_zealand' | 'italy' | 'brazil' | 'southeast_asia' | 'republic_of_korea' | 'english_speaking_regions' = 'worldwide',
+        sellingRegionName: 'worldwide' | 'north_america' | 'canada' | 'europe' | 'spain' | 'latvia' | 'uk' | 'france' | 'germany' | 'australia' | 'japan' | 'new_zealand' | 'italy' | 'brazil' | 'southeast_asia' | 'republic_of_korea' | 'english_speaking_regions' | 'all' = 'worldwide',
+        xPfLanguage?: string,
     ): CancelablePromise<any> {
         return this.httpRequest.request({
             method: 'GET',
             url: '/v2/catalog-products/{id}',
             path: {
                 'id': id,
+            },
+            headers: {
+                'X-PF-Language': xPfLanguage,
             },
             query: {
                 'selling_region_name': sellingRegionName,
@@ -108,17 +123,23 @@ export class CatalogV2Service {
      * Returns information about single specified catalog variant. [See catalog variant](#tag/Catalog-v2/What-is-a-catalog-variant)
      *
      * @param id Variant ID
+     * @param xPfLanguage Use this to specify which locale you would like to use in the responses, for some endpoints this can affect translations.
+     *
      * @returns any OK
      * @throws ApiError
      */
     public getVariantById(
         id: number,
+        xPfLanguage?: string,
     ): CancelablePromise<any> {
         return this.httpRequest.request({
             method: 'GET',
             url: '/v2/catalog-variants/{id}',
             path: {
                 'id': id,
+            },
+            headers: {
+                'X-PF-Language': xPfLanguage,
             },
             errors: {
                 401: `Unauthorized`,
@@ -131,17 +152,23 @@ export class CatalogV2Service {
      * catalog product. [See catalog variant](#tag/Catalog-v2/What-is-a-catalog-variant)
      *
      * @param id Product ID.
+     * @param xPfLanguage Use this to specify which locale you would like to use in the responses, for some endpoints this can affect translations.
+     *
      * @returns any OK
      * @throws ApiError
      */
     public getProductVariantsById(
         id: number,
+        xPfLanguage?: string,
     ): CancelablePromise<any> {
         return this.httpRequest.request({
             method: 'GET',
             url: '/v2/catalog-products/{id}/catalog-variants',
             path: {
                 'id': id,
+            },
+            headers: {
+                'X-PF-Language': xPfLanguage,
             },
             errors: {
                 401: `Unauthorized`,
@@ -193,17 +220,22 @@ export class CatalogV2Service {
      * To retrieve information about a particular products categories, use this feature. It returns details about the catalog categories associated with the catalog product. Categories help identify the type of product associated with them. For instance, the category "Men's T-shirts" denotes that the product is a subgroup of T-shirts intended for men.
      *
      * @param id Product ID.
+     * @param sellingRegionName Only returns the products that can be sold in the specified region. If is set to 'all' returns each region availability for specified product.
      * @returns any OK
      * @throws ApiError
      */
     public getCategoriesByProductId(
         id: number,
+        sellingRegionName: 'worldwide' | 'north_america' | 'canada' | 'europe' | 'spain' | 'latvia' | 'uk' | 'france' | 'germany' | 'australia' | 'japan' | 'new_zealand' | 'italy' | 'brazil' | 'southeast_asia' | 'republic_of_korea' | 'english_speaking_regions' | 'all' = 'worldwide',
     ): CancelablePromise<any> {
         return this.httpRequest.request({
             method: 'GET',
             url: '/v2/catalog-products/{id}/catalog-categories',
             path: {
                 'id': id,
+            },
+            query: {
+                'selling_region_name': sellingRegionName,
             },
             errors: {
                 401: `Unauthorized`,
@@ -218,18 +250,24 @@ export class CatalogV2Service {
      * The default value is determined based on the locale country. The inches are used for United States, Liberia
      * and Myanmar, for other countries the unit defaults to centimeters.
      *
+     * @param xPfLanguage Use this to specify which locale you would like to use in the responses, for some endpoints this can affect translations.
+     *
      * @returns any OK
      * @throws ApiError
      */
     public getProductSizeGuideById(
         id: number,
         unit?: string,
+        xPfLanguage?: string,
     ): CancelablePromise<any> {
         return this.httpRequest.request({
             method: 'GET',
             url: '/v2/catalog-products/{id}/sizes',
             path: {
                 'id': id,
+            },
+            headers: {
+                'X-PF-Language': xPfLanguage,
             },
             query: {
                 'unit': unit,
@@ -241,11 +279,28 @@ export class CatalogV2Service {
     }
     /**
      * Retrieve catalog product prices
+     *
      * Calculates prices for specific catalog product based on selling region and specified currency. Calculations also include Store discounts. Selling region is used to specify product production currency, that is the price that the product is natively manufactured in. Different selling regions might affect the overall price amount. Currency parameter is used only to define the currency that the prices will be displayed in.
+     *
+     * For more information on product pricing please refer to the information provided at https://www.printful.com/pricing
+     * <div class="alert alert-info" style="word-wrap: break-word; padding: 16px; border-radius: 0; cursor: default; color: #31708f; background-color: #d9edf7; border-color: #bce8f1;">
+     * <p>
+     * When developing against either API be sure to inform your customers that a placement will be included in the price of the product. If one placement is provided that placement will be included in the price, if multiple are provided the included placement will generally be the placement that comes earliest in the list of placements at `/v2/catalog-products/71` (though the discount will generally be up to the price of the first placement in that list). Certain placements come with additional service fees, such as large embroidery, this additional price will never be included even if the only placement is large embroidery.
+     * </p>
+     * <p>
+     * There is a minor difference in the handling of prices for placements between V1 and V2.
+     * In V1 the price of the first placement is always null, this is because there
+     * is always a placement included in the price of each product. In V2 the price of placements
+     * is always displayed even if it is included in the price of the product because any
+     * placement can be included.
+     * </p>
+     * </div>
      *
      * @param id Product ID.
      * @param sellingRegionName Specifies the region production currency that the product prices will be calculated in
      * @param currency The currency (3-letter code) used to determine currency in which the prices will be displayed. The store currency will be used by default. The format is compliant with ISO 4217 standard.
+     * @param xPfLanguage Use this to specify which locale you would like to use in the responses, for some endpoints this can affect translations.
+     *
      * @returns any OK
      * @throws ApiError
      */
@@ -253,12 +308,16 @@ export class CatalogV2Service {
         id: number,
         sellingRegionName?: string,
         currency?: string,
+        xPfLanguage?: string,
     ): CancelablePromise<any> {
         return this.httpRequest.request({
             method: 'GET',
             url: '/v2/catalog-products/{id}/prices',
             path: {
                 'id': id,
+            },
+            headers: {
+                'X-PF-Language': xPfLanguage,
             },
             query: {
                 'selling_region_name': sellingRegionName,
@@ -275,6 +334,8 @@ export class CatalogV2Service {
      * @param id Variant ID
      * @param sellingRegionName Specifies the region production currency that the product prices will be calculated in
      * @param currency The currency (3-letter code) used to determine currency in which the prices will be displayed. The store currency will be used by default. The format is compliant with ISO 4217 standard.
+     * @param xPfLanguage Use this to specify which locale you would like to use in the responses, for some endpoints this can affect translations.
+     *
      * @returns any OK
      * @throws ApiError
      */
@@ -282,12 +343,16 @@ export class CatalogV2Service {
         id: number,
         sellingRegionName?: string,
         currency?: string,
+        xPfLanguage?: string,
     ): CancelablePromise<any> {
         return this.httpRequest.request({
             method: 'GET',
             url: '/v2/catalog-variants/{id}/prices',
             path: {
                 'id': id,
+            },
+            headers: {
+                'X-PF-Language': xPfLanguage,
             },
             query: {
                 'selling_region_name': sellingRegionName,
@@ -300,7 +365,7 @@ export class CatalogV2Service {
     }
     /**
      * Retrieve blank images for a catalog product
-     * This feature helps to fetch blank images for a catalog product. These blank images are always white and semi-transparent and can be colored by the user on the client-side as per the specified color in the `data.color` field. The endpoint allows filtering of the result based on the type of the mockup, the placement, and the color of the product.
+     * This feature helps to fetch blank images for a catalog product. These blank images are always white and semi-transparent and can be colored by the user on the client-side as per the specified color in the `data.images.background_color` field. For some mockups the `data.images.background_image` could apply. The endpoint allows filtering of the result based on the type of the mockup, the placement, and the color of the product.
      *
      * @param id Product ID.
      * @param mockupStyleIds Used to specify style of images For example:
@@ -312,6 +377,8 @@ export class CatalogV2Service {
      *
      * @param colors String values separated by comma. You can specify multiple variant colors filters.
      * @param placement Filters result by specified placement
+     * @param xPfLanguage Use this to specify which locale you would like to use in the responses, for some endpoints this can affect translations.
+     *
      * @returns any OK
      * @throws ApiError
      */
@@ -320,12 +387,16 @@ export class CatalogV2Service {
         mockupStyleIds?: number,
         colors?: string,
         placement?: string,
+        xPfLanguage?: string,
     ): CancelablePromise<any> {
         return this.httpRequest.request({
             method: 'GET',
             url: '/v2/catalog-products/{id}/images',
             path: {
                 'id': id,
+            },
+            headers: {
+                'X-PF-Language': xPfLanguage,
             },
             query: {
                 'mockup_style_ids': mockupStyleIds,
@@ -349,6 +420,8 @@ export class CatalogV2Service {
      * Available mockup styles for catalog product can be found under _[Retrieve catalog product mockup styles](#operation/retrieveMockupStylesByProductId)_.
      *
      * @param placement Filters result by specified placement
+     * @param xPfLanguage Use this to specify which locale you would like to use in the responses, for some endpoints this can affect translations.
+     *
      * @returns any OK
      * @throws ApiError
      */
@@ -356,12 +429,16 @@ export class CatalogV2Service {
         id: number,
         mockupStyleIds?: number,
         placement?: string,
+        xPfLanguage?: string,
     ): CancelablePromise<any> {
         return this.httpRequest.request({
             method: 'GET',
             url: '/v2/catalog-variants/{id}/images',
             path: {
                 'id': id,
+            },
+            headers: {
+                'X-PF-Language': xPfLanguage,
             },
             query: {
                 'mockup_style_ids': mockupStyleIds,
@@ -378,24 +455,30 @@ export class CatalogV2Service {
      *
      * @param id Product ID.
      * @param placements One or more placement idenitifiers used to filter in mockup styles that match a given placement. The complete list of placements can be found [here](https://developers.printful.com/docs/#section/Placements).
-     * @param sellingRegionName Only returns the products that can be sold in the specified region.
+     * @param sellingRegionName Only returns the products that can be sold in the specified region. If is set to 'all' returns each region availability for specified product.
      * @param offset Result set offset
      * @param limit Number of items per page (max 100)
+     * @param xPfLanguage Use this to specify which locale you would like to use in the responses, for some endpoints this can affect translations.
+     *
      * @returns any OK
      * @throws ApiError
      */
     public retrieveMockupStylesByProductId(
         id: number,
         placements?: Array<string>,
-        sellingRegionName: 'worldwide' | 'north_america' | 'canada' | 'europe' | 'spain' | 'latvia' | 'uk' | 'france' | 'australia' | 'japan' | 'new_zealand' | 'italy' | 'brazil' | 'southeast_asia' | 'republic_of_korea' | 'english_speaking_regions' = 'worldwide',
+        sellingRegionName: 'worldwide' | 'north_america' | 'canada' | 'europe' | 'spain' | 'latvia' | 'uk' | 'france' | 'germany' | 'australia' | 'japan' | 'new_zealand' | 'italy' | 'brazil' | 'southeast_asia' | 'republic_of_korea' | 'english_speaking_regions' | 'all' = 'worldwide',
         offset?: number,
         limit?: number,
+        xPfLanguage?: string,
     ): CancelablePromise<any> {
         return this.httpRequest.request({
             method: 'GET',
             url: '/v2/catalog-products/{id}/mockup-styles',
             path: {
                 'id': id,
+            },
+            headers: {
+                'X-PF-Language': xPfLanguage,
             },
             query: {
                 'placements': placements,
@@ -417,11 +500,13 @@ export class CatalogV2Service {
      *
      * @param id Product ID.
      * @param placements One or more identifiers of a placement to return only products with variants that have that placement. The complete list of placements can be found [here](https://developers.printful.com/docs/#section/Placements).
-     * @param sellingRegionName Only returns the products that can be sold in the specified region.
+     * @param sellingRegionName Only returns the products that can be sold in the specified region. If is set to 'all' returns each region availability for specified product.
      * @param limit The number of results to return per page.
      * @param offset The number of results to not include in the response starting from the beginning of the list.
      *
      * This can be used to return results after the initial 100. For example, sending offset 100
+     *
+     * @param xPfLanguage Use this to specify which locale you would like to use in the responses, for some endpoints this can affect translations.
      *
      * @returns any OK
      * @throws ApiError
@@ -429,15 +514,19 @@ export class CatalogV2Service {
     public getMockupTemplatesByProductId(
         id: number,
         placements?: Array<string>,
-        sellingRegionName: 'worldwide' | 'north_america' | 'canada' | 'europe' | 'spain' | 'latvia' | 'uk' | 'france' | 'australia' | 'japan' | 'new_zealand' | 'italy' | 'brazil' | 'southeast_asia' | 'republic_of_korea' | 'english_speaking_regions' = 'worldwide',
+        sellingRegionName: 'worldwide' | 'north_america' | 'canada' | 'europe' | 'spain' | 'latvia' | 'uk' | 'france' | 'germany' | 'australia' | 'japan' | 'new_zealand' | 'italy' | 'brazil' | 'southeast_asia' | 'republic_of_korea' | 'english_speaking_regions' | 'all' = 'worldwide',
         limit: number = 20,
         offset?: number,
+        xPfLanguage?: string,
     ): CancelablePromise<any> {
         return this.httpRequest.request({
             method: 'GET',
             url: '/v2/catalog-products/{id}/mockup-templates',
             path: {
                 'id': id,
+            },
+            headers: {
+                'X-PF-Language': xPfLanguage,
             },
             query: {
                 'placements': placements,
@@ -456,11 +545,13 @@ export class CatalogV2Service {
      *
      * @param id Product ID.
      * @param techniques One or more techniques to return only products with variants that can be printed using one of the techniques.
-     * @param sellingRegionName Only returns the products that can be sold in the specified region.
+     * @param sellingRegionName Only returns the products that can be sold in the specified region. If is set to 'all' returns each region availability for specified product.
      * @param limit The number of results to return per page.
      * @param offset The number of results to not include in the response starting from the beginning of the list.
      *
      * This can be used to return results after the initial 100. For example, sending offset 100
+     *
+     * @param xPfLanguage Use this to specify which locale you would like to use in the responses, for some endpoints this can affect translations.
      *
      * @returns any OK
      * @throws ApiError
@@ -468,15 +559,19 @@ export class CatalogV2Service {
     public getProductStockAvailabilityById(
         id: number,
         techniques?: Array<TechniqueEnum>,
-        sellingRegionName: 'worldwide' | 'north_america' | 'canada' | 'europe' | 'spain' | 'latvia' | 'uk' | 'france' | 'australia' | 'japan' | 'new_zealand' | 'italy' | 'brazil' | 'southeast_asia' | 'republic_of_korea' | 'english_speaking_regions' = 'worldwide',
+        sellingRegionName: 'worldwide' | 'north_america' | 'canada' | 'europe' | 'spain' | 'latvia' | 'uk' | 'france' | 'germany' | 'australia' | 'japan' | 'new_zealand' | 'italy' | 'brazil' | 'southeast_asia' | 'republic_of_korea' | 'english_speaking_regions' | 'all' = 'worldwide',
         limit: number = 20,
         offset?: number,
+        xPfLanguage?: string,
     ): CancelablePromise<any> {
         return this.httpRequest.request({
             method: 'GET',
             url: '/v2/catalog-products/{id}/availability',
             path: {
                 'id': id,
+            },
+            headers: {
+                'X-PF-Language': xPfLanguage,
             },
             query: {
                 'techniques': techniques,
@@ -498,20 +593,26 @@ export class CatalogV2Service {
      *
      * @param id Variant ID
      * @param techniques One or more techniques to return only products with variants that can be printed using one of the techniques.
-     * @param sellingRegionName Only returns the products that can be sold in the specified region.
+     * @param sellingRegionName Only returns the products that can be sold in the specified region. If is set to 'all' returns each region availability for specified product.
+     * @param xPfLanguage Use this to specify which locale you would like to use in the responses, for some endpoints this can affect translations.
+     *
      * @returns any OK
      * @throws ApiError
      */
     public getVariantStockAvailabilityById(
         id: number,
         techniques?: Array<TechniqueEnum>,
-        sellingRegionName: 'worldwide' | 'north_america' | 'canada' | 'europe' | 'spain' | 'latvia' | 'uk' | 'france' | 'australia' | 'japan' | 'new_zealand' | 'italy' | 'brazil' | 'southeast_asia' | 'republic_of_korea' | 'english_speaking_regions' = 'worldwide',
+        sellingRegionName: 'worldwide' | 'north_america' | 'canada' | 'europe' | 'spain' | 'latvia' | 'uk' | 'france' | 'germany' | 'australia' | 'japan' | 'new_zealand' | 'italy' | 'brazil' | 'southeast_asia' | 'republic_of_korea' | 'english_speaking_regions' | 'all' = 'worldwide',
+        xPfLanguage?: string,
     ): CancelablePromise<any> {
         return this.httpRequest.request({
             method: 'GET',
             url: '/v2/catalog-variants/{id}/availability',
             path: {
                 'id': id,
+            },
+            headers: {
+                'X-PF-Language': xPfLanguage,
             },
             query: {
                 'techniques': techniques,

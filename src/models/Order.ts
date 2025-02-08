@@ -2,10 +2,10 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { Address } from './Address';
+import type { AddressReadonly } from './AddressReadonly';
 import type { CatalogItemSummary } from './CatalogItemSummary';
 import type { Costs } from './Costs';
-import type { Customization } from './Customization';
+import type { CustomizationReadonly } from './CustomizationReadonly';
 import type { HateoasLink } from './HateoasLink';
 import type { RetailCosts } from './RetailCosts';
 import type { WarehouseItemSummary } from './WarehouseItemSummary';
@@ -16,19 +16,19 @@ export type Order = {
     /**
      * Order ID
      */
-    id?: number;
+    id: number;
     /**
      * Order ID from the external system
      */
-    external_id?: string | null;
+    external_id: string | null;
     /**
      * Store ID
      */
-    store_id?: number;
+    store_id: number;
     /**
      * Shipping method. Defaults to 'STANDARD'
      */
-    shipping?: string;
+    shipping: string;
     /**
      * Order status:<br />
      * **draft** - order is not submitted for fulfillment<br />
@@ -41,50 +41,50 @@ export type Order = {
      * **fulfilled** - all items are shipped
      *
      */
-    status?: string;
+    status: string;
     /**
      * Time when the order was created
      */
-    created_at?: string;
+    created_at: string;
     /**
      * Time when the order was updated
      */
-    updated_at?: string;
+    updated_at: string;
     /**
      * The recipient data.
      */
-    recipient?: Address;
-    costs?: Costs;
-    retail_costs?: RetailCosts;
+    recipient: AddressReadonly;
+    costs: Costs;
+    retail_costs: RetailCosts;
     /**
      * Simplified order item list. For a full list of all items use the [Get Order Items](#operation/getItemsByOrderId) endpoint.
      */
-    order_items?: Array<(CatalogItemSummary | WarehouseItemSummary)>;
-    customization?: Customization;
+    order_items: Array<(CatalogItemSummary | WarehouseItemSummary)>;
+    customization?: CustomizationReadonly;
     /**
      * HATEOAS links
      */
-    _links?: {
+    _links: {
         /**
          * Link to the order details
          */
-        self?: HateoasLink;
+        self: HateoasLink;
         /**
          * Link to the order confirmation
          */
-        order_confirmation?: HateoasLink;
+        order_confirmation: HateoasLink;
         /**
          * Link to the order invoice
          */
-        order_invoices?: HateoasLink;
+        order_invoices: HateoasLink;
         /**
          * Link to all order items associated with the order
          */
-        order_items?: HateoasLink;
+        order_items: HateoasLink;
         /**
          * Link to the shipments associated with the order
          */
-        shipments?: HateoasLink;
+        shipments: HateoasLink;
     };
 };
 

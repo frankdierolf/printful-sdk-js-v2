@@ -11,11 +11,11 @@ export type Layer = {
     /**
      * Type of layer (e.g. file, text)
      */
-    type?: string;
+    type: string;
     /**
      * File image URL if layer type is file
      */
-    url?: string;
+    url: string;
     layer_options?: LayerOptions;
     position?: LayerPosition;
 };

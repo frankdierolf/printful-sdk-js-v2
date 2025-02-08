@@ -6,15 +6,15 @@ export type Country = {
     /**
      * Country code
      */
-    code?: string;
+    code: string;
     /**
      * Country name
      */
-    name?: string;
+    name: string;
     /**
      * This array contains all states available for a country. If states are not required or not applicable for a given country this array will be empty.
      */
-    states?: Array<{
+    states: Array<{
         /**
          * State code
          */

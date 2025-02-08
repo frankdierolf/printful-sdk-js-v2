@@ -6,21 +6,21 @@ export type SellingRegionStockAvailability = {
     /**
      * Name of the selling region for which the stock availability apply
      */
-    name?: SellingRegionStockAvailability.name;
+    name: SellingRegionStockAvailability.name;
     /**
      * Availability status:
-     * * in stock: Product with the specified technique is stocked in this region
-     * * out of stock: Product with the specified technique is not stocked in this region
-     * * not fulfillable: Printful does not stock this product in this region
+     * * in stock: The product is stocked in this region and fulfillable with the specified technique
+     * * out of stock: Product went out of stock at the supplier in this region but is fulfillable with the specified technique
+     * * not fulfillable: (a) Printful does not stock this product in this region; or (b) the product is not fulfillable with the specified technique in this region
      * * unknown: The exact stock status could not be determined
      *
      */
-    availability?: SellingRegionStockAvailability.availability;
+    availability: SellingRegionStockAvailability.availability;
     /**
      * Availability of a placement options for a catalog variant in a specified selling region. If a placement option is present in this array and availability is set to true it means it is available for this product. If it is set to false it means that the placement option is available for the variant, but not currently fulfillable for the given selling region settings. If an option is not present in the array but is present as an option on the product (see: [Retrieve a single catalog product](#tag/Catalog-v2/operation/getProducts)) it means the option is always available for that product.
      *
      */
-    placement_option_availability?: Array<{
+    placement_option_availability: Array<{
         name?: string;
         availability?: boolean;
     }>;
@@ -38,6 +38,7 @@ export namespace SellingRegionStockAvailability {
         LATVIA = 'latvia',
         UK = 'uk',
         FRANCE = 'france',
+        GERMANY = 'germany',
         AUSTRALIA = 'australia',
         JAPAN = 'japan',
         NEW_ZEALAND = 'new_zealand',
@@ -49,9 +50,9 @@ export namespace SellingRegionStockAvailability {
     }
     /**
      * Availability status:
-     * * in stock: Product with the specified technique is stocked in this region
-     * * out of stock: Product with the specified technique is not stocked in this region
-     * * not fulfillable: Printful does not stock this product in this region
+     * * in stock: The product is stocked in this region and fulfillable with the specified technique
+     * * out of stock: Product went out of stock at the supplier in this region but is fulfillable with the specified technique
+     * * not fulfillable: (a) Printful does not stock this product in this region; or (b) the product is not fulfillable with the specified technique in this region
      * * unknown: The exact stock status could not be determined
      *
      */

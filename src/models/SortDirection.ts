@@ -14,6 +14,9 @@
  * * `sort_type=price`
  * * ascending from lowest to highest price.
  * * descending from highest to lowest price.
+ * * `sort_type=bestseller`
+ * * ascending from non bestsellers to bestsellers.
+ * * descending from bestsellers to non bestsellers.
  *
  */
 export enum SortDirection {

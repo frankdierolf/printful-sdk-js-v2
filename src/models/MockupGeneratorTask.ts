@@ -12,7 +12,7 @@ export type MockupGeneratorTask = {
     /**
      * Unique task identifier used to check status of the task and retrieve the results once the task is ready.
      */
-    id?: number;
+    id: number;
     /**
      * Task status:
      * * `completed` – Mockup Generator task was successfully processed
@@ -20,29 +20,29 @@ export type MockupGeneratorTask = {
      * * `failed` – Mockup Generator task failed
      *
      */
-    status?: MockupGeneratorTask.status;
+    status: MockupGeneratorTask.status;
     /**
      * A list of mockups grouped by variant. Note that the same list of mockups can appear under multiple variants, this happens in cases where the variants have the same mockups, for example if the only difference is the size of the variant.
      */
-    catalog_variant_mockups?: Array<{
+    catalog_variant_mockups: Array<{
         /**
          * ID of a catalog variant for which the mockup was generated.
          */
-        catalog_variant_id?: number;
+        catalog_variant_id: number;
         /**
          * List of generated mockups
          */
-        mockups?: Array<Mockup>;
+        mockups: Array<Mockup>;
     }>;
-    failure_reasons?: Array<Error>;
+    failure_reasons: Array<Error>;
     /**
      * HATEOAS links
      */
-    readonly _links?: {
+    readonly _links: {
         /**
          * Link to the Generator Task details
          */
-        self?: HateoasLink;
+        self: HateoasLink;
     };
 };
 export namespace MockupGeneratorTask {

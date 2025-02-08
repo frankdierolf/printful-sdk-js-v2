@@ -10,4 +10,5 @@ export enum SortType {
     NEW = 'new',
     RATING = 'rating',
     PRICE = 'price',
+    BESTSELLER = 'bestseller',
 }

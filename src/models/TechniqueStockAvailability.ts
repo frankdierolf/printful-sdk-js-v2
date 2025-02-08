@@ -5,10 +5,10 @@
 import type { SellingRegionStockAvailability } from './SellingRegionStockAvailability';
 import type { TechniqueEnum } from './TechniqueEnum';
 export type TechniqueStockAvailability = {
-    technique?: TechniqueEnum;
+    technique: TechniqueEnum;
     /**
      * List of selling regions with stock availability
      */
-    selling_regions?: Array<SellingRegionStockAvailability>;
+    selling_regions: Array<SellingRegionStockAvailability>;
 };
 

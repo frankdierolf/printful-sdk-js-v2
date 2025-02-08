@@ -7,34 +7,34 @@ import type { CalculationStatus } from './CalculationStatus';
  * The Order's retail costs
  */
 export type RetailCosts = {
-    calculation_status?: CalculationStatus;
+    calculation_status: CalculationStatus;
     /**
      * The code of the currency in which the retail costs are returned.
      */
-    currency?: string;
+    currency: string;
     /**
      * Total cost of all items.
      */
-    subtotal?: string | null;
+    subtotal: string | null;
     /**
      * Discount sum.
      */
-    discount?: string;
+    discount: string;
     /**
      * Shipping costs.
      */
-    shipping?: string;
+    shipping: string;
     /**
      * Sum of VAT (not included in the item price).
      */
-    vat?: string;
+    vat: string;
     /**
      * Sum of taxes (not included in the item price).
      */
-    tax?: string;
+    tax: string;
     /**
      * Grand Total (subtotal-discount+tax+vat+shipping).
      */
-    total?: string | null;
+    total: string | null;
 };
 

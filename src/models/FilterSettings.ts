@@ -9,9 +9,9 @@ export type FilterSettings = Array<{
     /**
      * Name of the filter
      */
-    name?: string;
+    name: string;
     /**
      * Value of the filter
      */
-    value?: string;
+    value: string;
 }>;

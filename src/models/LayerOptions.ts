@@ -3,8 +3,9 @@
 /* tslint:disable */
 /* eslint-disable */
 import type { dPuffOption } from './dPuffOption';
+import type { KnitwearYarnColor } from './KnitwearYarnColor';
 import type { ThreadColorsOption } from './ThreadColorsOption';
 /**
  * List of layer options
  */
-export type LayerOptions = Array<(dPuffOption | ThreadColorsOption)>;
+export type LayerOptions = Array<(dPuffOption | ThreadColorsOption | KnitwearYarnColor)>;

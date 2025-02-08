@@ -14,19 +14,19 @@ export type SizeTable = {
     /**
      * The unit the size table values are in
      */
-    unit?: SizeTable.unit;
+    unit: SizeTable.unit;
     /**
      * The size table description (HTML)
      */
-    description?: string;
+    description: string;
     /**
      * The URL of an image showing the measurements
      */
-    image_url?: string;
+    image_url: string;
     /**
      * The description of the measurement image (HTML)
      */
-    image_description?: string;
+    image_description: string;
     /**
      * The size table measurements
      */

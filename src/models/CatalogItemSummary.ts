@@ -10,27 +10,27 @@ export type CatalogItemSummary = {
     /**
      * Item ID
      */
-    readonly id?: number;
+    readonly id: number;
     /**
      * The item type
      */
-    type?: CatalogItemSummary.type;
+    type: CatalogItemSummary.type;
     /**
      * Item source
      */
-    source?: CatalogItemSummary.source;
+    source: CatalogItemSummary.source;
     /**
      * Catalog Variant ID associated with the Item
      */
-    catalog_variant_id?: number;
+    catalog_variant_id: number;
     /**
      * Item user specified external ID
      */
-    external_id?: string | null;
+    external_id: string | null;
     /**
      * Item quantity
      */
-    quantity?: number;
+    quantity: number;
     /**
      * Item custom name
      */
@@ -38,24 +38,24 @@ export type CatalogItemSummary = {
     /**
      * The price Printful charges for the Item
      */
-    price?: string;
+    price: string;
     /**
      * Item retail price
      */
-    retail_price?: string;
+    retail_price: string;
     /**
      * The price currency
      */
-    currency?: string;
+    currency: string;
     /**
      * The retail price currency
      */
-    retail_currency?: string;
+    retail_currency: string;
     /**
      * HATEOAS links
      */
-    readonly _links?: {
-        self?: HateoasLink;
+    readonly _links: {
+        self: HateoasLink;
     };
 };
 export namespace CatalogItemSummary {
