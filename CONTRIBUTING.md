@@ -86,6 +86,17 @@ export { Placement } from './models/Placement';
 + export type { Placement as PlacementType } from './models/Placement';
 ```
 
+### Local Testing
+
+```sh
+# (optional) test the bundle locally
+cd examples/typescript && yarn && cd ../../
+yarn
+rm -rf examples/typescript/node_modules/printful-sdk-js-v2/dist && mv dist examples/typescript/node_modules/printful-sdk-js-v2
+cd examples/typescript
+yarn start
+```
+
 ## Appendix
 
 - **SDK Generator:**

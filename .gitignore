@@ -1,6 +1,6 @@
 docs
 src/**/*.js
-
+examples/typescript/*.js
 # Logs
 logs
 *.log

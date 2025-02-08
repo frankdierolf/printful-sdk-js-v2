@@ -1,10 +1,10 @@
 {
   "name": "typescript-examples",
   "scripts": {
-    "start": "tsc && node getCountries.js"
+    "start": "tsc && node getStoresV2.js"
   },
   "dependencies": {
-    "printful-sdk-js-v2": "^2.0.1-beta"
+    "printful-sdk-js-v2": "*"
   },
   "devDependencies": {
     "typescript": "^5.5.4"
