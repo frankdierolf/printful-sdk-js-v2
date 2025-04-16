@@ -1,12 +1,13 @@
 {
   "name": "typescript-examples",
   "scripts": {
-    "start": "tsc && node getStoresV2.js"
+    "start": "tsc && node $1"
   },
   "dependencies": {
-    "printful-sdk-js-v2": "*"
+    "printful-sdk-js-v2": "^2.0.3-beta"
   },
   "devDependencies": {
+    "@types/node": "^22.14.1",
     "typescript": "^5.5.4"
   }
 }

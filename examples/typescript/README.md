@@ -2,6 +2,10 @@
 
 TypeScript code for **Printify SDK v2** (`printful-sdk-js-v2`)
 
+## Prerequisites
+
+- A Printful API Token ([generated here](https://developers.printful.com/tokens))
+
 ## Setup
 
 ```
@@ -26,7 +30,8 @@ pnpm install
 ## Usage
 
 ```sh
-$ tsc && node getCountries.js
+# edit the package.json "start" script
+$ npm start
 ```
 
 ### TypeScript Configuration

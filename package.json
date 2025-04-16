@@ -1,6 +1,6 @@
 {
   "name": "printful-sdk-js-v2",
-  "version": "2.0.2-beta",
+  "version": "2.0.3-beta",
   "description": "Printful SDK for Node.js / TypeScript. A wrapper for the Printful REST API (v2)",
   "author": "Spencer Lepine <spencer.sayhello@gmail.com>",
   "license": "MIT",
@@ -72,6 +72,12 @@
     "tslib": "^2.6.3",
     "typedoc": "^0.26.5",
     "typescript": "^5.5.4"
+  },
+  "overrides": {
+    "comment": "TODO - remove this after upgrading to rollup v3",
+    "rollup-plugin-dts": {
+      "rollup": "^2.79.2"
+    }
   },
   "husky": {
     "hooks": {
