@@ -48,7 +48,8 @@
     "bundle": "rollup -c",
     "generate-sdk": "openapi --input ./openapi.json --output ./src --name PrintfulClient",
     "generate-docs": "typedoc src/index.ts",
-    "release": "npm run bundle && npm run generate-docs"
+    "release": "npm run bundle && npm run generate-docs",
+    "audit:fix": "npm_config_yes=true npx yarn-audit-fix"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^26.0.1",
